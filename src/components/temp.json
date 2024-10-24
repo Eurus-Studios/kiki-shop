@@ -1,0 +1,21 @@
+[{
+    img: "/src/assets/shadeFinder/L1-1.jpg",
+    name: "L1-1",
+    nextLevel: [
+    {
+      img: "/src/assets/shadeFinder/L2-1.jpg",
+      name: "L2-1",
+    },
+        
+  ],
+    
+  },
+  {
+    img: "/src/assets/shadeFinder/L1-2.jpg",
+    name: "L1-2",
+  },
+  {
+    img: "/src/assets/shadeFinder/L1-3.jpg",
+    name: "L1-3",
+  },
+];
