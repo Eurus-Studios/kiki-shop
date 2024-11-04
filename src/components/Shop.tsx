@@ -31,9 +31,8 @@ const Shop: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-  const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]); // Increase max price range
-  const [showNewArrivals, setShowNewArrivals] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
   // Map the products with default values for missing fields
   const allProducts: Product[] = products.map((product) => ({
@@ -61,10 +60,6 @@ const Shop: React.FC = () => {
         product.price >= priceRange[0] && product.price <= priceRange[1]
       );
       console.log(
-        "New arrivals match:",
-        !showNewArrivals || product.isNewArrival
-      );
-      console.log(
         "Shade match:",
         !selectedShade ||
           product.shades.some((shade) => shade.name === selectedShade)
@@ -75,7 +70,6 @@ const Shop: React.FC = () => {
         (selectedCategory === "all" || product.category === selectedCategory) &&
         product.price >= priceRange[0] &&
         product.price <= priceRange[1] &&
-        (!showNewArrivals || product.isNewArrival) &&
         (!selectedShade ||
           product.shades.some((shade) => shade.name === selectedShade))
       );
@@ -94,10 +88,10 @@ const Shop: React.FC = () => {
       <div className="max-w-[2000px] mx-auto">
         {/* Hero Section */}
 
-        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-4">
+        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-4 min-h-screen">
           {/* Sidebar */}
           <div className="w-full lg:w-80 flex-shrink-0">
-            <div className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto">
+            <div className="lg:sticky lg:top-24">
               <div className="lg:hidden flex justify-between items-center p-4 bg-white rounded-lg shadow-sm mb-4">
                 <h2 className="text-xl font-bold">Filters</h2>
                 <button
@@ -117,8 +111,6 @@ const Shop: React.FC = () => {
                   setSelectedCategory={setSelectedCategory}
                   priceRange={priceRange}
                   setPriceRange={setPriceRange}
-                  showNewArrivals={showNewArrivals}
-                  setShowNewArrivals={setShowNewArrivals}
                   sortOrder={sortOrder}
                   setSortOrder={setSortOrder}
                   categories={categories as string[]}
@@ -130,7 +122,7 @@ const Shop: React.FC = () => {
           </div>
 
           {/* Main content */}
-          <div className="flex-grow lg:pl-8 mt-8 lg:mt-0">
+          <div className="flex-grow lg:pl-8 lg:mt-0">
             {/* Search and Results Info */}
             <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
               <div className="relative w-full mb-6">
@@ -145,9 +137,6 @@ const Shop: React.FC = () => {
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <p className="text-gray-600">
-                  Showing {filteredProducts.length} products
-                </p>
                 {selectedShade && (
                   <div className="flex items-center bg-gray-100 px-4 py-2 rounded-full">
                     <span className="text-sm font-medium">

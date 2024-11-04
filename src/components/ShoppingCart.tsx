@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaTrash, FaMinus, FaPlus } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
@@ -6,9 +6,29 @@ import { useCart } from "../context/CartContext";
 const ShoppingCart: React.FC = () => {
   const { cart, removeFromCart, clearCart, getTotalCost, updateQuantity } =
     useCart();
+  const [showModal, setShowModal] = useState(false);
+
+  const ComingSoonModal = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-8 rounded-xl max-w-md w-full mx-4">
+        <h2 className="text-2xl font-bold mb-4">Coming Soon!</h2>
+        <p className="text-gray-600 mb-6">
+          We're working hard to implement the checkout process. Please check
+          back later!
+        </p>
+        <button
+          onClick={() => setShowModal(false)}
+          className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {showModal && <ComingSoonModal />}
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
@@ -144,9 +164,7 @@ const ShoppingCart: React.FC = () => {
                 </div>
 
                 <button
-                  onClick={() =>
-                    alert("Checkout functionality not implemented")
-                  }
+                  onClick={() => setShowModal(true)}
                   className="w-full bg-black text-white py-3 rounded-lg font-medium mb-4 hover:bg-gray-800 transition-colors duration-300"
                 >
                   Proceed to Checkout

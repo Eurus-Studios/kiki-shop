@@ -43,8 +43,6 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-
-
   return (
     <nav className="sticky top-0 left-0 w-full flex flex-col bg-zinc-950 text-white z-50">
       <div className="h-[1px] w-full bg-gradient-to-r from-zinc-800 via-zinc-500 to-zinc-800"></div>
@@ -55,7 +53,7 @@ const Navbar = () => {
           {/* Logo section */}
           <div className="flex items-center flex-shrink-0">
             <Link
-              to="/"
+              to="https://kikibeauty.in"
               className="flex items-center group"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -73,7 +71,7 @@ const Navbar = () => {
               to="/"
               className="hover:text-white text-zinc-300 transition-all duration-300 py-2 relative group whitespace-nowrap"
             >
-              <span className="relative z-10">Shop By Category</span>
+              <span className="relative z-10">Shop</span>
               <span className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-zinc-600 to-zinc-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
             </Link>
             <Link
@@ -181,7 +179,7 @@ const Navbar = () => {
       >
         <div className="px-4 py-4 space-y-2">
           {[
-            { to: "/shop", text: "Shop By Category" },
+            { to: "/shop", text: "Shop" },
             { to: "/shade-finder", text: "Find your Shade" },
             { to: "/blogs", text: "Blogs" },
             { to: "/our-story", text: "Our Story" },

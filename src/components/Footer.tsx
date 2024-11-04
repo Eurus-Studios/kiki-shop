@@ -1,8 +1,53 @@
 import logo from "../assets/kiki-beauty-white.png";
-import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaTwitter,
+  FaCheck,
+  FaTimes,
+  FaSpinner,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { motion } from "framer-motion";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMessage(""); // Reset error message
+    try {
+      const response = await axios.post(
+        "https://api-sac6b737pq-uc.a.run.app/subscribe",
+        { email }
+      );
+      if (response.status >= 200 && response.status < 300) {
+        setStatus("success");
+        setEmail(""); // Reset the input field
+        setTimeout(() => setStatus("idle"), 3000); // Reset status after 3 seconds
+      } else {
+        throw new Error(`Unexpected response status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Subscription failed:", error);
+      setStatus("error");
+      // Extract error message
+      if (axios.isAxiosError(error) && error.response) {
+        setErrorMessage(error.response.data.message || "An error occurred.");
+      } else {
+        setErrorMessage("An error occurred. Please try again.");
+      }
+      setTimeout(() => setStatus("idle"), 3000); // Reset status after 3 seconds
+    }
+  };
+
   return (
     <footer className="bg-black text-[#F9E7DA] py-16 relative overflow-hidden">
       {/* Subtle gradient overlay */}
@@ -91,23 +136,62 @@ const Footer = () => {
             <div className="mt-8 group">
               <h4 className="text-lg font-semibold mb-4 relative inline-block">
                 Subscribe to our newsletter
-                <span className="absolute -bottom-1 left-0 w-1/2 h-0.5 bg-[#E4AA81] transform origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#E4AA81] transform origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
               </h4>
-              <form className="flex group">
+              <form className="flex group" onSubmit={handleSubscribe}>
                 <input
-                  disabled
                   type="email"
                   placeholder="Enter your email"
-                  className="cursor-not-allowed bg-black/50 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#E4AA81] flex-grow border border-[#E4AA81]/20 transition-all duration-300 group-hover:border-[#E4AA81]/40"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-black/50 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#E4AA81] flex-grow border border-[#E4AA81]/20 transition-all duration-300 group-hover:border-[#E4AA81]/40"
+                  required
+                  aria-label="Email address"
                 />
-                <button
-                  disabled
+                <motion.button
                   type="submit"
-                  className="cursor-not-allowed bg-[#E4AA81] text-black px-6 py-2 rounded-r-lg font-bold hover:bg-[#F9E7DA] transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#E4AA81]/20"
+                  className={`px-6 py-2 rounded-r-lg font-bold transition-all duration-300 transform ${
+                    status === "success"
+                      ? "bg-green-500 text-white shadow-lg shadow-green-500/20"
+                      : status === "error"
+                      ? "bg-red-500 text-white shadow-lg shadow-red-500/20"
+                      : "bg-[#E4AA81] text-black hover:bg-[#F9E7DA] hover:scale-105 hover:shadow-lg hover:shadow-[#E4AA81]/20"
+                  }`}
+                  whileHover={{ scale: 1.1 }}
+                  animate={{
+                    scale: status === "success" ? 1.1 : 1,
+                    rotate: status === "error" ? [0, -10, 10, -10, 0] : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  disabled={status === "loading"}
                 >
-                  Subscribe
-                </button>
+                  {status === "loading" ? (
+                    <FaSpinner className="animate-spin" />
+                  ) : status === "success" ? (
+                    <div className="flex items-center">
+                      <FaCheck className="mr-2" /> Subscribed!
+                    </div>
+                  ) : status === "error" ? (
+                    <div className="flex items-center">
+                      <FaTimes className="mr-2" /> Try Again
+                    </div>
+                  ) : (
+                    "Subscribe"
+                  )}
+                </motion.button>
               </form>
+              <div
+                className="mt-2 text-sm"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {status === "success" && (
+                  <p className="text-green-500">Thank you for subscribing!</p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-500">{errorMessage}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>

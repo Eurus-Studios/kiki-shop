@@ -412,7 +412,7 @@ const ShadeFinder: React.FC = () => {
               >
                 <div className="h-40 rounded-2xl overflow-hidden shadow-2xl bg-gray-50 relative group">
                   <img
-                    src={`/src/assets/${
+                    src={`/assets/${
                       shades.find((shade) => shade.name === selectedShade)?.img
                     }`}
                     alt={selectedShade}

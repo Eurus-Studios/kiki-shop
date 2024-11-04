@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "kiki-beauty"
-  }
+  },
+  "targets": {
+    "kiki-beauty": {
+      "hosting": {
+        "shop": [
+          "kiki-beauty"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

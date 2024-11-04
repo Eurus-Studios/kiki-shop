@@ -4,7 +4,6 @@ import {
   FaSortAmountUp,
   FaTags,
   FaDollarSign,
-  FaStarHalfAlt,
   FaFilter,
 } from "react-icons/fa";
 import { useShade } from "../context/ShadeContext";
@@ -14,8 +13,6 @@ interface SidebarProps {
   setSelectedCategory: (category: string) => void;
   priceRange: [number, number];
   setPriceRange: (range: [number, number]) => void;
-  showNewArrivals: boolean;
-  setShowNewArrivals: (show: boolean) => void;
   sortOrder: "asc" | "desc";
   setSortOrder: (order: "asc" | "desc") => void;
   categories: string[];
@@ -28,8 +25,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   setSelectedCategory,
   priceRange,
   setPriceRange,
-  showNewArrivals,
-  setShowNewArrivals,
   sortOrder,
   setSortOrder,
   categories,
@@ -121,22 +116,6 @@ const Sidebar: React.FC<SidebarProps> = ({
               ) : (
                 <FaSortAmountDown className="text-gray-600" />
               )}
-            </button>
-          </div>
-          <div className="mb-6">
-            <label className="flex items-center text-sm font-medium text-black mb-2">
-              <FaStarHalfAlt className="mr-2 text-gray-600" />
-              New Arrivals
-            </label>
-            <button
-              onClick={() => setShowNewArrivals(!showNewArrivals)}
-              className={`w-full px-4 py-2 text-sm font-medium ${
-                showNewArrivals
-                  ? "bg-black text-white"
-                  : "bg-white text-black border border-gray-300"
-              } transition-colors duration-300`}
-            >
-              {showNewArrivals ? "Show All" : "New Arrivals Only"}
             </button>
           </div>
 

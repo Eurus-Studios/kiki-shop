@@ -27,7 +27,7 @@ const OurStory: React.FC = () => {
         <motion.div style={{ opacity, scale }} className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/30 z-10" />
           <motion.img
-            src="/src/assets/OS-1.jpg"
+            src="/assets/OS-1.jpg"
             alt="Hero background"
             className="absolute inset-0 w-full h-full object-cover"
             initial={{ scale: 1.2 }}
@@ -94,7 +94,7 @@ const OurStory: React.FC = () => {
               transition={{ duration: 0.4 }}
             />
             <motion.img
-              src="/src/assets/OS-1.jpg"
+              src="/assets/OS-1.jpg"
               alt="Beauty store representation"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl sm:rounded-3xl rotate-2 shadow-xl"
               whileHover={{ rotate: 0, scale: 1.02 }}
@@ -159,7 +159,7 @@ const OurStory: React.FC = () => {
               transition={{ duration: 0.4 }}
             />
             <motion.img
-              src="/src/assets/OS-2.jpg"
+              src="/assets/OS-2.jpg"
               alt="Kiki's journey"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl sm:rounded-3xl -rotate-2 shadow-xl"
               whileHover={{ rotate: 0, scale: 1.02 }}
@@ -183,7 +183,7 @@ const OurStory: React.FC = () => {
               transition={{ duration: 0.4 }}
             />
             <motion.img
-              src="/src/assets/OS-3.jpg"
+              src="/assets/OS-3.jpg"
               alt="Celebrating diversity"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl sm:rounded-3xl rotate-2 shadow-xl"
               whileHover={{ rotate: 0, scale: 1.02 }}
@@ -219,38 +219,52 @@ const OurStory: React.FC = () => {
 
       {/* Call to Action Section */}
       <motion.div
-        className="relative overflow-hidden bg-zinc-50"
+        className="relative overflow-hidden bg-gradient-to-br from-zinc-100 to-zinc-200"
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
         variants={fadeIn}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-100 via-white to-zinc-100" />
-        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 sm:space-y-8"
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 md:space-x-10"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900">
-              Join Our Journey
-            </h2>
-            <p className="text-lg sm:text-xl text-zinc-600 max-w-2xl mx-auto">
-              Experience makeup that celebrates your unique beauty
-            </p>
-            <Link to="/">
-              <motion.button
-                className="px-8 sm:px-10 py-3 sm:py-4 bg-zinc-900 text-white rounded-full font-medium text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Explore Collection
-              </motion.button>
-            </Link>
+            <motion.div
+              className="w-full md:w-1/2 space-y-6"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-zinc-900 leading-tight">
+                Join Our Journey
+              </h2>
+              <p className="text-xl text-zinc-700 leading-relaxed">
+                Experience makeup that celebrates your unique beauty and
+                empowers your true self
+              </p>
+            </motion.div>
+            <motion.div
+              className="w-full md:w-1/2 flex justify-center"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Link to="/">
+                <motion.button
+                  className="px-10 py-4 bg-zinc-900 text-white rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Explore Our Collection
+                </motion.button>
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
