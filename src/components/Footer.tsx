@@ -95,15 +95,21 @@ const Footer = () => {
               <span className="absolute -bottom-1 left-0 w-1/2 h-0.5 bg-[#E4AA81] transform origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             </h3>
             <ul className="space-y-3">
-              {["Contact Us", "FAQs", "Shipping & Returns"].map((item) => (
+              {["FAQs", "Returns & Exchange"].map((item) => (
                 <li key={item} className="group">
-                  <a
-                    href="#"
+                  <Link
+                    to={
+                      item === "Returns & Exchange"
+                        ? "/returns-and-exchange"
+                        : item === "FAQs"
+                        ? "/faqs"
+                        : "#"
+                    }
                     className="hover:text-[#E4AA81] transition-all duration-300 text-lg inline-flex items-center group-hover:translate-x-2 transform"
                   >
                     <span className="h-[1px] w-0 bg-[#E4AA81] mr-0 transition-all duration-300 group-hover:w-4 group-hover:mr-2"></span>
                     {item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -212,7 +218,7 @@ const Footer = () => {
                 Privacy Policy
               </Link>
               <Link
-                to="/terms-conditions"
+                to="/terms"
                 className="text-sm hover:text-[#E4AA81] transition-all duration-300 group inline-flex items-center"
               >
                 <span className="h-[1px] w-0 bg-[#E4AA81] mr-0 transition-all duration-300 group-hover:w-4 group-hover:mr-2"></span>

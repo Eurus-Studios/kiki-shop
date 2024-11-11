@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 interface QuizOption {
   img: string;
   name: string;
+  description?: string;
   nextLevel?: QuizOption[];
 }
 
@@ -45,30 +46,44 @@ const ShadeFinder: React.FC = () => {
     const newSelectedImages = [...selectedImages, selected.name];
     setSelectedImages(newSelectedImages);
 
-    if (selected.nextLevel) {
-      // Animate out current options
+    if (currentLevel === 3) {
+      // Store the shade result first
+      const mappedShade = shadeMapping[selected.name];
+      const foundShade = shades.find((shade) => shade.name === mappedShade);
+
+      if (foundShade) {
+        // Don't set selectedShade yet, just store it temporarily
+        localStorage.setItem("tempSelectedShade", foundShade.name);
+      }
+
+      // Show undertone options
       const container = document.querySelector(".options-grid");
       if (container) {
         container.classList.add("fade-out");
       }
 
-      // Delay the state update to allow for animation
+      setTimeout(() => {
+        setCurrentOptions(quizData.undertones);
+        setCurrentLevel(4);
+      }, 300);
+    } else if (currentLevel === 4) {
+      // After undertone selection, show the stored result
+      const storedShade = localStorage.getItem("tempSelectedShade");
+      if (storedShade) {
+        setSelectedShade(storedShade);
+        localStorage.removeItem("tempSelectedShade"); // Clean up
+      }
+    } else if (selected.nextLevel) {
+      // Handle levels 1 and 2
+      const container = document.querySelector(".options-grid");
+      if (container) {
+        container.classList.add("fade-out");
+      }
+
       setTimeout(() => {
         setCurrentOptions(selected.nextLevel ?? []);
         setCurrentLevel(currentLevel + 1);
       }, 300);
-    } else {
-      const mappedShade = shadeMapping[selected.name];
-      const foundShade = shades.find((shade) => shade.name === mappedShade);
-
-      if (foundShade) {
-        setSelectedShade(foundShade.name);
-      } else {
-        console.error(
-          `No matching shade found for quiz result: ${selected.name}`
-        );
-        setSelectedShade(shades[0].name);
-      }
     }
   };
 
@@ -82,6 +97,21 @@ const ShadeFinder: React.FC = () => {
     setCurrentOptions(quizData.start);
     setSelectedShade("");
     setIsQuizStarted(false); // Reset to show header
+  };
+
+  const getQuizTitle = (level: number) => {
+    switch (level) {
+      case 1:
+        return "We've got 12 shades, let's find yours. Which of these is closest to your skin tone?";
+      case 2:
+        return "Love it. Let's get a bit more precise. Which of these most resembles your skin tone?";
+      case 3:
+        return "You're doing great. Our last shade-centric question for you. What's your best match here?";
+      case 4:
+        return "Which one of these is your undertone?";
+      default:
+        return "Select Your Best Match";
+    }
   };
 
   return (
@@ -252,17 +282,17 @@ const ShadeFinder: React.FC = () => {
               >
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-sm font-medium text-gray-500">
-                    Step {currentLevel} of 3
+                    Step {currentLevel} of 4
                   </span>
                   <span className="text-sm font-medium text-gray-900">
-                    {Math.round(((currentLevel - 1) / 2) * 100)}% Complete
+                    {Math.round(((currentLevel - 1) / 3) * 100)}% Complete
                   </span>
                 </div>
                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                   <motion.div
                     className="h-full bg-black rounded-full origin-left"
                     initial={{ scaleX: 0 }}
-                    animate={{ scaleX: (currentLevel - 1) / 2 }}
+                    animate={{ scaleX: (currentLevel - 1) / 3 }}
                     transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
                   />
                 </div>
@@ -275,7 +305,7 @@ const ShadeFinder: React.FC = () => {
                 transition={{ delay: 0.3 }}
               >
                 <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                  Select Your Best Match
+                  {getQuizTitle(currentLevel)}
                 </h2>
                 <p className="text-gray-600 max-w-md mx-auto">
                   Choose the shade that most closely matches your natural skin
@@ -286,7 +316,11 @@ const ShadeFinder: React.FC = () => {
 
             {/* Options Grid */}
             <motion.div
-              className="options-grid grid grid-cols-1 sm:grid-cols-3 gap-12 mb-16 px-4"
+              className={`options-grid grid ${
+                currentLevel === 4
+                  ? "grid-cols-1 gap-6 max-w-2xl mx-auto"
+                  : "grid-cols-1 sm:grid-cols-3 gap-12"
+              } mb-16 px-4`}
               key={currentLevel}
               variants={{
                 hidden: { opacity: 0 },
@@ -309,68 +343,77 @@ const ShadeFinder: React.FC = () => {
                     show: { opacity: 1, y: 0 },
                   }}
                   onClick={() => handleImageSelect(option)}
-                  className="group relative"
-                  whileHover={{ y: -8 }}
+                  className={`group relative ${
+                    currentLevel === 4
+                      ? "bg-white p-6 rounded-xl border border-gray-200 hover:border-black transition-all duration-300"
+                      : ""
+                  }`}
+                  whileHover={currentLevel === 4 ? { y: -4 } : { y: -8 }}
                   transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  {/* Hover Background Effect */}
-                  <div
-                    className="absolute -inset-4 rounded-full bg-black/5 opacity-0 
-                    group-hover:opacity-100 transition-all duration-500 blur-xl"
-                  />
-
-                  {/* Main Image Container */}
-                  <div className="relative">
-                    <div
-                      className="w-56 h-56 mx-auto rounded-full overflow-hidden bg-gray-50 
-                      shadow-md group-hover:shadow-xl transition-all duration-500"
-                    >
-                      {/* Image */}
+                  {currentLevel === 4 ? (
+                    // Undertone option layout
+                    <div className="text-left">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        {option.name}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {option.description}
+                      </p>
+                      <div className="mt-4 h-0.5 w-0 bg-black group-hover:w-full transition-all duration-300" />
+                    </div>
+                  ) : (
+                    // Regular image-based option layout
+                    <>
+                      {/* Existing image option layout code */}
                       <div
-                        className="relative h-full transform transition-transform duration-500 
-                        ease-out group-hover:scale-110"
-                      >
-                        <img
-                          src={option.img}
-                          alt={option.name}
-                          className="w-full h-full object-cover"
-                        />
-
-                        {/* Gradient Overlay */}
+                        className="absolute -inset-4 rounded-full bg-black/5 opacity-0 
+                        group-hover:opacity-100 transition-all duration-500 blur-xl"
+                      />
+                      <div className="relative">
                         <div
-                          className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/50 
+                          className="w-56 h-56 mx-auto rounded-full overflow-hidden bg-gray-50 
+                          shadow-md group-hover:shadow-xl transition-all duration-500"
+                        >
+                          <div
+                            className="relative h-full transform transition-transform duration-500 
+                            ease-out group-hover:scale-110"
+                          >
+                            <img
+                              src={option.img}
+                              alt={option.name}
+                              className="w-full h-full object-cover"
+                            />
+                            <div
+                              className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/50 
+                              opacity-0 group-hover:opacity-100 transition-all duration-500"
+                            />
+                          </div>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <motion.div
+                              className="w-3 h-3 bg-white rounded-full transform scale-0 opacity-0 
+                              group-hover:scale-100 group-hover:opacity-100 transition-all duration-300"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="absolute -inset-2 rounded-full border border-black/0 
+                          group-hover:border-black/20 transform scale-90 group-hover:scale-100 
                           opacity-0 group-hover:opacity-100 transition-all duration-500"
                         />
                       </div>
-
-                      {/* Simple Hover Indicator */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          className="w-3 h-3 bg-white rounded-full transform scale-0 opacity-0 
-                            group-hover:scale-100 group-hover:opacity-100 transition-all duration-300"
+                      <div
+                        className="absolute -inset-8 rounded-full opacity-0 group-hover:opacity-100 
+                        transition-opacity duration-500"
+                      >
+                        <div
+                          className="absolute inset-0 rounded-full bg-gradient-to-b from-black/5 
+                          to-transparent blur-2xl transform scale-95 group-hover:scale-100 
+                          transition-transform duration-500"
                         />
                       </div>
-                    </div>
-
-                    {/* Focus Ring */}
-                    <div
-                      className="absolute -inset-2 rounded-full border border-black/0 
-                      group-hover:border-black/20 transform scale-90 group-hover:scale-100 
-                      opacity-0 group-hover:opacity-100 transition-all duration-500"
-                    />
-                  </div>
-
-                  {/* Hover Glow */}
-                  <div
-                    className="absolute -inset-8 rounded-full opacity-0 group-hover:opacity-100 
-                    transition-opacity duration-500"
-                  >
-                    <div
-                      className="absolute inset-0 rounded-full bg-gradient-to-b from-black/5 
-                      to-transparent blur-2xl transform scale-95 group-hover:scale-100 
-                      transition-transform duration-500"
-                    />
-                  </div>
+                    </>
+                  )}
                 </motion.button>
               ))}
             </motion.div>

@@ -181,4 +181,23 @@ export default {
       ],
     },
   ],
+  undertones: [
+    {
+      img: "/assets/undertone-pink.jpg",
+      name: "Pink",
+      description:
+        "I have purple veins or silver platinum jewelry looks good on me",
+    },
+    {
+      img: "/assets/undertone-neutral.jpg",
+      name: "Neutral",
+      description:
+        "I have blue-green veins or all shades of jewelry look good on me",
+    },
+    {
+      img: "/assets/undertone-yellow.jpg",
+      name: "Yellow",
+      description: "I have green veins or gold jewelry looks good on me",
+    },
+  ],
 };

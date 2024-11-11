@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useShade } from "../context/ShadeContext";
-import { FaPlus, FaMinus, FaCheck } from "react-icons/fa";
+import { FaPlus, FaMinus, FaCheck, FaPlay } from "react-icons/fa";
 import { products } from "../data/products";
 import { Dialog } from "@headlessui/react";
 import { Link } from "react-router-dom";
@@ -28,6 +28,13 @@ interface PinCodeResponse {
   }>;
 }
 
+// Add this interface near other interfaces
+interface VideoGallery {
+  thumbnail: string;
+  videoId: string;
+  title: string;
+}
+
 // Add this sanitization function
 const sanitizeInput = (input: string): string => {
   return input.replace(/[<>]/g, "").trim();
@@ -43,6 +50,59 @@ const fetchPinCodeDetails = async (
   const data = await response.json();
   return data[0];
 };
+
+// Update the VideoCard component with an enhanced design
+const VideoCard = ({
+  video,
+  onClick,
+}: {
+  video: VideoGallery;
+  onClick: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className="group relative w-full overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl hover:border-gray-200"
+  >
+    <div className="aspect-video relative overflow-hidden rounded-t-2xl">
+      <img
+        src={video.thumbnail}
+        alt={video.title}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      {/* Enhanced overlay with multiple gradients */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
+
+      {/* Animated play button */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-20 h-20 rounded-full bg-white/95 flex items-center justify-center transform scale-75 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 transition-all duration-500 shadow-xl">
+          <FaPlay className="text-black ml-1.5 text-2xl" />
+        </div>
+      </div>
+
+      {/* Duration badge */}
+      <div className="absolute bottom-3 right-3 px-2.5 py-1 bg-black/80 rounded-md text-white text-xs font-medium backdrop-blur-sm">
+        4:32
+      </div>
+    </div>
+
+    {/* Enhanced video info section */}
+    <div className="p-5">
+      <h3 className="text-left font-semibold text-gray-900 line-clamp-2 group-hover:text-black transition-colors mb-2">
+        {video.title}
+      </h3>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-gray-500 flex items-center group-hover:text-black/70 transition-colors">
+          <FaPlay className="w-3 h-3 mr-2" />
+          Watch Tutorial
+        </p>
+        <span className="text-xs text-gray-400 group-hover:text-black/50 transition-colors">
+          Beauty Tips
+        </span>
+      </div>
+    </div>
+  </button>
+);
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -67,6 +127,7 @@ const ProductDetails = () => {
   });
   const [isLoadingPinCode, setIsLoadingPinCode] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<VideoGallery | null>(null);
 
   if (!product) {
     return (
@@ -458,8 +519,32 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          {/* Product Details Tabs - Now outside the grid */}
-          <div className="border-t border-gray-200 mt-8">
+          {/* Video gallery section */}
+          {product.videos && product.videos.length > 0 && (
+            <div className="border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 py-20 px-6 lg:px-8">
+              <div className="max-w-7xl mx-auto">
+                <div className="text-center mb-16">
+                  <h2 className="text-4xl font-bold text-gray-900">
+                    Video Tutorials{" "}
+                  </h2>
+                </div>
+
+                {/* Enhanced grid layout with better spacing */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+                  {product.videos.map((video: VideoGallery) => (
+                    <VideoCard
+                      key={video.videoId}
+                      video={video}
+                      onClick={() => setSelectedVideo(video)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Product Details Tabs */}
+          <div className="border-t border-gray-200">
             <div className="max-w-7xl mx-auto">
               {/* Tabs Navigation */}
               <div className="border-b border-gray-200">
@@ -863,6 +948,57 @@ const ProductDetails = () => {
                   Got it, thanks!
                 </button>
               </div>
+            </div>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+      <Dialog
+        open={selectedVideo !== null}
+        onClose={() => setSelectedVideo(null)}
+        className="relative z-50"
+      >
+        <div
+          className="fixed inset-0 bg-black/95 backdrop-blur-md"
+          aria-hidden="true"
+        />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <Dialog.Panel className="mx-auto max-w-5xl w-full">
+            <div className="relative">
+              <button
+                onClick={() => setSelectedVideo(null)}
+                className="absolute -top-14 right-0 text-white/80 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10 group"
+              >
+                <span className="absolute right-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-sm">
+                  Close video
+                </span>
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedVideo?.videoId}?autoplay=1&rel=0&modestbranding=1`}
+                  title={selectedVideo?.title}
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              {selectedVideo && (
+                <div className="mt-4 text-white/90">
+                  <h3 className="text-lg font-medium">{selectedVideo.title}</h3>
+                </div>
+              )}
             </div>
           </Dialog.Panel>
         </div>

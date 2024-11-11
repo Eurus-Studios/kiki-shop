@@ -1,5 +1,11 @@
 import { shades } from './shades';
 
+export interface VideoGallery {
+    thumbnail: string;
+    videoId: string;
+    title: string;
+}
+
 export interface Product {
     id: number;
     name: string;
@@ -15,6 +21,7 @@ export interface Product {
         howToUse: string[];
     };
     sampleUrl: string;
+    videos?: VideoGallery[];
 }
 
 export const products: Product[] = [
@@ -25,7 +32,7 @@ export const products: Product[] = [
         shortDescription: "12 shades of lightweight, 16-hour wear with SPF protection, moisture-lock, and sweat-resistant technology—crafted to celebrate every dusky skin tone.",
         price: 799,
         originalPrice: 1199,
-        images: ["/assets/foundation-1.jpg", "/assets/foundation-2.jpg", "/assets/foundation-3.jpg", "/assets/foundation-4.jpg"],
+        images: ["/assets/foundation-1.jpg", "/assets/foundation-3.jpg", "/assets/foundation-4.jpg", '/assets/Foundation-Video.gif'],
         shades: shades,
         details: {
             description: `
@@ -141,7 +148,24 @@ export const products: Product[] = [
                 "Step 3: Blend this lightweight yet buildable to full coverage foundation using your fingertips, brush or a beauty blender for a luminous matte look."
             ]
         },
-        sampleUrl: "/sample/foundation.mp4"
+        sampleUrl: "/sample/foundation.mp4",
+        videos: [
+            {
+                videoId: "0Ql8V805Yvo",
+                thumbnail: "https://i.ytimg.com/vi/0Ql8V805Yvo/maxresdefault.jpg",
+                title: "How to Apply Foundation for Perfect Coverage | Professional Makeup Tutorial"
+            },
+            {
+                videoId: "lHIKjn0PevQ",
+                thumbnail: "https://i.ytimg.com/vi/lHIKjn0PevQ/maxresdefault.jpg",
+                title: "Natural Everyday Foundation Routine | Makeup Tips & Tricks"
+            },
+            {
+                videoId: "Pq4CsTjKmN4",
+                thumbnail: "https://i.ytimg.com/vi/Pq4CsTjKmN4/maxresdefault.jpg",
+                title: "Foundation Tips for Beginners | Step by Step Tutorial"
+            }
+        ]
     },
     {
         id: 2,
@@ -150,7 +174,7 @@ export const products: Product[] = [
         shortDescription: "Whether you're covering up last night's stories or today's dark circles, this buildable concealer is your secret weapon for a natural, unfiltered look that lasts all day.",
         price: 699,
         originalPrice: 799,
-        images: ["/assets/concealer-1.jpg", "/assets/concealer-2.jpg", "/assets/concealer-3.jpg"],
+        images: ["/assets/concealer-1.jpg", "/assets/concealer-2.jpg", "/assets/concealer-3.jpg", "/assets/Concealer-Video.gif"],
         shades: shades,
         details: {
             description: `
@@ -272,6 +296,23 @@ export const products: Product[] = [
                 "Step 2: Layer over Corrector to disguise stubborn dark circles. Swipe the central reservoir side on redness or any unevenness, then use a finger to seamlessly blend out"
             ]
         },
-        sampleUrl: "/sample/concealer.mp4"
+        sampleUrl: "/sample/concealer.mp4",
+        videos: [
+            {
+                videoId: "0Ql8V805Yvo",
+                thumbnail: "https://i.ytimg.com/vi/0Ql8V805Yvo/maxresdefault.jpg",
+                title: "How to Apply Foundation for Perfect Coverage | Professional Makeup Tutorial"
+            },
+            {
+                videoId: "lHIKjn0PevQ",
+                thumbnail: "https://i.ytimg.com/vi/lHIKjn0PevQ/maxresdefault.jpg",
+                title: "Natural Everyday Foundation Routine | Makeup Tips & Tricks"
+            },
+            {
+                videoId: "Pq4CsTjKmN4",
+                thumbnail: "https://i.ytimg.com/vi/Pq4CsTjKmN4/maxresdefault.jpg",
+                title: "Foundation Tips for Beginners | Step by Step Tutorial"
+            }
+        ]
     }
 ];

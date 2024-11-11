@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
+        sans: ["Helvetica Neue", "system-ui", "sans-serif"],
       },
       keyframes: {
         "fade-in-out": {
@@ -53,5 +53,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    // ... other plugins
+  ],
 };

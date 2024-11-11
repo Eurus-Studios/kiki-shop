@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Shop from "./components/Shop";
 import ProductDetails from "./components/ProductDetails";
 import PrivacyPolicy from "./components/PrivacyPolicy";
-import TermsConditions from "./components/TermsConditions";
 import ShoppingCart from "./components/ShoppingCart";
 import { CartProvider } from "./context/CartContext";
 import ShadeFinder from "./components/ShadeFinder";
@@ -14,7 +13,9 @@ import BlogsPage from "./components/BlogsPage";
 import BlogPage from "./components/BlogPage";
 import ScrollToTop from "./components/ScrollToTop";
 import OurStory from "./components/OurStory";
-
+import TermsAndConditions from "./components/TermsAndConditions";
+import ReturnsAndExchange from "./components/ReturnsAndExchange";
+import FAQs from "./components/FAQs";
 const App: React.FC = () => {
   return (
     <CartProvider>
@@ -28,12 +29,17 @@ const App: React.FC = () => {
                 <Route path="/" element={<Shop />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-conditions" element={<TermsConditions />} />
                 <Route path="/cart" element={<ShoppingCart />} />
                 <Route path="/shade-finder" element={<ShadeFinder />} />
                 <Route path="/our-story" element={<OurStory />} />
                 <Route path="/blogs" element={<BlogsPage />} />
                 <Route path="/blog/:id" element={<BlogPage />} />
+                <Route path="/terms" element={<TermsAndConditions />} />
+                <Route
+                  path="/returns-and-exchange"
+                  element={<ReturnsAndExchange />}
+                />
+                <Route path="/faqs" element={<FAQs />} />
               </Routes>
             </main>
             <Footer />
