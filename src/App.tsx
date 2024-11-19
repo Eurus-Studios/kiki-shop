@@ -1,49 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Shop from "./components/Shop";
-import ProductDetails from "./components/ProductDetails";
-import PrivacyPolicy from "./components/PrivacyPolicy";
-import ShoppingCart from "./components/ShoppingCart";
+import { BrowserRouter as Router } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
-import ShadeFinder from "./components/ShadeFinder";
 import { ShadeProvider } from "./context/ShadeContext";
-import BlogsPage from "./components/BlogsPage";
-import BlogPage from "./components/BlogPage";
-import ScrollToTop from "./components/ScrollToTop";
-import OurStory from "./components/OurStory";
-import TermsAndConditions from "./components/TermsAndConditions";
-import ReturnsAndExchange from "./components/ReturnsAndExchange";
-import FAQs from "./components/FAQs";
+import AppContent from "./components/AppContent";
+
 const App: React.FC = () => {
   return (
     <CartProvider>
       <ShadeProvider>
         <Router>
-          <ScrollToTop />
-          <div className="flex flex-col min-h-screen bg-white font-sans">
-            <Navbar />
-            <main className="flex-grow w-full">
-              <Routes>
-                <Route path="/" element={<Shop />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/cart" element={<ShoppingCart />} />
-                <Route path="/shade-finder" element={<ShadeFinder />} />
-                <Route path="/our-story" element={<OurStory />} />
-                <Route path="/blogs" element={<BlogsPage />} />
-                <Route path="/blog/:id" element={<BlogPage />} />
-                <Route path="/terms" element={<TermsAndConditions />} />
-                <Route
-                  path="/returns-and-exchange"
-                  element={<ReturnsAndExchange />}
-                />
-                <Route path="/faqs" element={<FAQs />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
+          <AppContent />
         </Router>
       </ShadeProvider>
     </CartProvider>

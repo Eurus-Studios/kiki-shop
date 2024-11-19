@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useShade } from "../context/ShadeContext";
-import { FaPlus, FaMinus, FaCheck, FaPlay } from "react-icons/fa";
+import { FaPlus, FaMinus, FaCheck, FaPlay, FaPause } from "react-icons/fa";
 import { products } from "../data/products";
 import { Dialog } from "@headlessui/react";
 import { Link } from "react-router-dom";
@@ -50,6 +50,9 @@ const fetchPinCodeDetails = async (
   const data = await response.json();
   return data[0];
 };
+
+// Add this helper function near the top of the file
+const isVideo = (url: string) => url.toLowerCase().endsWith(".mp4");
 
 // Update the VideoCard component with an enhanced design
 const VideoCard = ({
@@ -104,6 +107,100 @@ const VideoCard = ({
   </button>
 );
 
+// Update the VideoPlayer component with better hover states and loading
+const VideoPlayer = ({ src }: { src: string }) => {
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  }, [src]);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleVideoEnd = () => {
+    setIsPlaying(false);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  const handleLoadedData = () => {
+    setIsLoading(false);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  };
+
+  return (
+    <div
+      className="relative w-full h-full group cursor-pointer"
+      onClick={togglePlay}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover"
+        playsInline
+        onEnded={handleVideoEnd}
+        onLoadedData={handleLoadedData}
+        loop
+        muted
+      />
+
+      {/* Loading spinner */}
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+          <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+        </div>
+      )}
+
+      {/* Play/Pause button */}
+      <div
+        className={`
+          absolute inset-0 flex items-center justify-center
+          ${isPlaying ? "bg-black/0" : "bg-black/20"}
+          transition-colors duration-300
+          group-hover:bg-black/20
+        `}
+      >
+        <div
+          className={`
+            transform transition-all duration-300
+            ${isPlaying ? "opacity-0 scale-90" : "opacity-100 scale-100"}
+            group-hover:opacity-100 group-hover:scale-100
+            w-20 h-20 rounded-full bg-white/90 
+            flex items-center justify-center 
+            shadow-xl backdrop-blur-sm
+          `}
+        >
+          {isPlaying ? (
+            <FaPause className="text-black text-2xl" />
+          ) : (
+            <FaPlay className="text-black text-2xl ml-1.5" />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ProductDetails = () => {
   const { id } = useParams();
   const product = products.find((p) => p.id === Number(id));
@@ -137,15 +234,21 @@ const ProductDetails = () => {
     );
   }
 
+  useEffect(() => {
+    if (!selectedShade) {
+      setSelectedShade(Object.keys(product.images)[0]);
+    }
+  }, [product, selectedShade, setSelectedShade]);
+
   const handleAddToCart = () => {
-    const shadeToUse = selectedShade || product.shades[0].name;
+    const currentShade = selectedShade || Object.keys(product.images)[0];
     addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
       quantity,
-      image: product.images[0],
-      shade: shadeToUse,
+      image: product.images[currentShade][0],
+      shade: currentShade,
     });
   };
 
@@ -190,7 +293,7 @@ const ProductDetails = () => {
             phone: "+91" + formData.phone,
             address: fullAddress,
             product: product.name,
-            shade: selectedShade || product.shades[0].name,
+            shade: selectedShade || Object.keys(product.images)[0],
           }),
         }
       );
@@ -280,25 +383,6 @@ const ProductDetails = () => {
     }
   };
 
-  // Add type annotations for map callbacks
-  const renderImages = (image: string, index: number) => (
-    <button
-      key={index}
-      onClick={() => setSelectedImage(index)}
-      className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-        selectedImage === index
-          ? "border-black"
-          : "border-transparent hover:border-gray-300"
-      }`}
-    >
-      <img
-        src={image}
-        alt={`${product.name} view ${index + 1}`}
-        className="w-full h-full object-cover"
-      />
-    </button>
-  );
-
   // Add type for shade from your shades type
   interface Shade {
     name: string;
@@ -346,6 +430,45 @@ const ProductDetails = () => {
     );
   };
 
+  // Move renderImages inside the component
+  const renderImages = (media: string, index: number) => (
+    <button
+      key={index}
+      onClick={() => setSelectedImage(index)}
+      className={`
+        aspect-square rounded-lg overflow-hidden 
+        border-2 transition-all duration-300
+        ${
+          selectedImage === index
+            ? "border-black ring-2 ring-black ring-offset-2"
+            : "border-transparent hover:border-gray-300"
+        }
+      `}
+    >
+      {isVideo(media) ? (
+        <div className="relative w-full h-full group">
+          <video
+            src={media}
+            className="w-full h-full object-cover"
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center">
+              <FaPlay className="text-black text-xs ml-0.5" />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <img
+          src={media}
+          alt={`${product.name} view ${index + 1}`}
+          className="w-full h-full object-cover"
+        />
+      )}
+    </button>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4">
@@ -355,14 +478,58 @@ const ProductDetails = () => {
             {/* Image Gallery */}
             <div className="space-y-4">
               <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                <img
-                  src={product.images[selectedImage]}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
+                {selectedShade &&
+                  (isVideo(product.images[selectedShade][selectedImage]) ? (
+                    <VideoPlayer
+                      src={product.images[selectedShade][selectedImage]}
+                    />
+                  ) : (
+                    <img
+                      src={product.images[selectedShade][selectedImage]}
+                      alt={product.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ))}
               </div>
               <div className="grid grid-cols-4 gap-4">
-                {product.images.map(renderImages)}
+                {selectedShade &&
+                  product.images[selectedShade].map((media, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`
+                      aspect-square rounded-lg overflow-hidden 
+                      border-2 transition-all duration-300
+                      ${
+                        selectedImage === index
+                          ? "border-black ring-2 ring-black ring-offset-2"
+                          : "border-transparent hover:border-gray-300"
+                      }
+                    `}
+                    >
+                      {isVideo(media) ? (
+                        <div className="relative w-full h-full group">
+                          <video
+                            src={media}
+                            className="w-full h-full object-cover"
+                            muted
+                            playsInline
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center">
+                              <FaPlay className="text-black text-xs ml-0.5" />
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <img
+                          src={media}
+                          alt={`${product.name} view ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
+                    </button>
+                  ))}
               </div>
             </div>
 
@@ -519,30 +686,6 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          {/* Video gallery section */}
-          {product.videos && product.videos.length > 0 && (
-            <div className="border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 py-20 px-6 lg:px-8">
-              <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
-                  <h2 className="text-4xl font-bold text-gray-900">
-                    Video Tutorials{" "}
-                  </h2>
-                </div>
-
-                {/* Enhanced grid layout with better spacing */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-                  {product.videos.map((video: VideoGallery) => (
-                    <VideoCard
-                      key={video.videoId}
-                      video={video}
-                      onClick={() => setSelectedVideo(video)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Product Details Tabs */}
           <div className="border-t border-gray-200">
             <div className="max-w-7xl mx-auto">
@@ -658,14 +801,18 @@ const ProductDetails = () => {
             {/* Add product preview */}
             <div className="mb-8 p-4 bg-gray-50 rounded-lg flex items-center gap-4">
               <img
-                src={product.images[0]}
+                src={
+                  product.images[
+                    selectedShade || Object.keys(product.images)[0]
+                  ][0]
+                }
                 alt={product.name}
                 className="w-16 h-16 object-cover rounded-md"
               />
               <div>
                 <h3 className="font-medium text-gray-900">{product.name}</h3>
                 <p className="text-sm text-gray-600">
-                  Shade: {selectedShade || product.shades[0].name}
+                  Shade: {selectedShade || Object.keys(product.images)[0]}
                 </p>
               </div>
             </div>
@@ -1003,6 +1150,30 @@ const ProductDetails = () => {
           </Dialog.Panel>
         </div>
       </Dialog>
+
+      {/* Video gallery section */}
+      {product.videos && product.videos.length > 0 && (
+        <div className="border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 py-20 px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900">
+                Video Tutorials{" "}
+              </h2>
+            </div>
+
+            {/* Enhanced grid layout with better spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+              {product.videos.map((video: VideoGallery) => (
+                <VideoCard
+                  key={video.videoId}
+                  video={video}
+                  onClick={() => setSelectedVideo(video)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

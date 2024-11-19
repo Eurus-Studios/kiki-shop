@@ -13,7 +13,7 @@ export interface Product {
     shortDescription: string;
     price: number;
     originalPrice: number;
-    images: string[];
+    images: Record<string, string[]>;
     shades: typeof shades;
     details: {
         description: string;
@@ -32,7 +32,93 @@ export const products: Product[] = [
         shortDescription: "12 shades of lightweight, 16-hour wear with SPF protection, moisture-lock, and sweat-resistant technology—crafted to celebrate every dusky skin tone.",
         price: 799,
         originalPrice: 1199,
-        images: ["/assets/foundation-1.jpg", "/assets/foundation-3.jpg", "/assets/foundation-4.jpg", '/assets/Foundation-Video.gif'],
+        images: {
+            "Feisty": [
+                "/assets/Foundation/Feisty/Copy of Copy of Productpage-Foundation-6.png",
+                "/assets/Foundation/Feisty/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Feisty/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Feisty/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Feisty/Before-After.png"
+            ],
+
+
+            "Fierce": [
+                "/assets/Foundation/Fierce/Copy of Copy of Productpage-Foundation-7..png",
+                "/assets/Foundation/Fierce/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Fierce/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Fierce/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Fierce/Before-After.png"
+            ],
+
+            "Mystique": [
+                "/assets/Foundation/Mystique/Copy of Copy of Productpage-Foundation-9.png",
+                "/assets/Foundation/Mystique/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Mystique/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Mystique/Before-After.png"
+            ],
+            "Fearless": [
+                "/assets/Foundation/Fearless/Copy of Copy of Productpage-Foundation-5.png",
+                "/assets/Foundation/Fearless/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Fearless/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Fearless/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Fearless/Before-After.png"
+            ],
+
+            "Electric": [
+                "/assets/Foundation/Electric/Copy of Copy of Productpage-Foundation-2.png",
+                "/assets/Foundation/Electric/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Electric/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Electric/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Electric/Before-After.png"
+            ],
+            "Majestic": [
+                "/assets/Foundation/Majestic/Copy of Copy of Productpage-Foundation-8.png",
+                "/assets/Foundation/Majestic/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Majestic/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Majestic/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Majestic/Before-After.png"
+            ],
+            "Celestial": [
+                "/assets/Foundation/Celestial/Copy of Copy of Productpage-Foundation-1.png",
+                "/assets/Foundation/Celestial/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Celestial/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Celestial/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Celestial/Before-After.png"
+            ],
+            "Stellar": [
+                "/assets/Foundation/Stellar/Copy of Copy of Productpage-Foundation-11.png",
+                "/assets/Foundation/Stellar/Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Stellar/Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Stellar/Productpage-Foundation-4.png",
+                "/assets/Foundation/Stellar/Before-After.png"
+            ],
+            "Unstoppable": [
+                "/assets/Foundation/Unstoppable/Copy of Copy of Productpage-Foundation-12.png",
+                "/assets/Foundation/Unstoppable/Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Unstoppable/Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Unstoppable/Productpage-Foundation-4.png",
+                "/assets/Foundation/Unstoppable/Before-After.png"
+            ],
+            "Empress": [
+                "/assets/Foundation/Empress/Copy of Copy of Productpage-Foundation-3.png",
+                "/assets/Foundation/Empress/Copy of Productpage-Foundation-2.jpg",
+                "/assets/Foundation/Empress/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Empress/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Empress/Before-After.png"
+            ],
+            "Savage": [
+                "/assets/Foundation/Savage/Copy of Copy of Productpage-Foundation-10.png",
+                "/assets/Foundation/Savage/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Savage/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Savage/Before-After.png"
+            ],
+            "Enigma": [
+                "/assets/Foundation/Enigma/Copy of Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Enigma/Copy of Productpage-Foundation-3.jpg",
+                "/assets/Foundation/Enigma/Copy of Productpage-Foundation-4.png",
+                "/assets/Foundation/Enigma/Before-After.png"
+            ],
+        },
         shades: shades,
         details: {
             description: `
@@ -151,18 +237,18 @@ export const products: Product[] = [
         sampleUrl: "/sample/foundation.mp4",
         videos: [
             {
-                videoId: "0Ql8V805Yvo",
-                thumbnail: "https://i.ytimg.com/vi/0Ql8V805Yvo/maxresdefault.jpg",
+                videoId: "thR-EIv748A",
+                thumbnail: "https://i.ytimg.com/vi/thR-EIv748A/maxresdefault.jpg",
                 title: "How to Apply Foundation for Perfect Coverage | Professional Makeup Tutorial"
             },
             {
-                videoId: "lHIKjn0PevQ",
-                thumbnail: "https://i.ytimg.com/vi/lHIKjn0PevQ/maxresdefault.jpg",
+                videoId: "L7loJHLdQSI",
+                thumbnail: "https://i.ytimg.com/vi/L7loJHLdQSI/maxresdefault.jpg",
                 title: "Natural Everyday Foundation Routine | Makeup Tips & Tricks"
             },
             {
-                videoId: "Pq4CsTjKmN4",
-                thumbnail: "https://i.ytimg.com/vi/Pq4CsTjKmN4/maxresdefault.jpg",
+                videoId: "L3mcbH2jPRk",
+                thumbnail: "https://i.ytimg.com/vi/L3mcbH2jPRk/maxresdefault.jpg",
                 title: "Foundation Tips for Beginners | Step by Step Tutorial"
             }
         ]
@@ -174,7 +260,81 @@ export const products: Product[] = [
         shortDescription: "Whether you're covering up last night's stories or today's dark circles, this buildable concealer is your secret weapon for a natural, unfiltered look that lasts all day.",
         price: 699,
         originalPrice: 799,
-        images: ["/assets/concealer-1.jpg", "/assets/concealer-2.jpg", "/assets/concealer-3.jpg", "/assets/Concealer-Video.gif"],
+        images: {
+            "Feisty": [
+                "/assets/Concealer/Feisty/Copy of Copy of Productpage-Concealer-6.png",
+                "/assets/Concealer/Feisty/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Feisty/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Feisty/Before-After.png"
+            ],
+
+            "Fierce": [
+                "/assets/Concealer/Fierce/Copy of Copy of Productpage-Concealer-7.png",
+                "/assets/Concealer/Fierce/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Fierce/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Fierce/Before-After.png"
+            ],
+            "Mystique": [
+                "/assets/Concealer/Mystique/Copy of Copy of Productpage-Concealer-9.png",
+                "/assets/Concealer/Mystique/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Mystique/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Mystique/Before-After.png"
+            ],
+            "Fearless": [
+                "/assets/Concealer/Fearless/Copy of Copy of Productpage-Concealer-5.png",
+                "/assets/Concealer/Fearless/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Fearless/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Fearless/Before-After.png"
+            ],
+            "Electric": [
+                "/assets/Concealer/Electric/Copy of Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Electric/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Electric/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Electric/Before-After.png"
+            ],
+            "Majestic": [
+                "/assets/Concealer/Majestic/Copy of Copy of Productpage-Concealer-8.png",
+                "/assets/Concealer/Majestic/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Majestic/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Majestic/Before-After.png"
+            ],
+            "Celestial": [
+                "/assets/Concealer/Celestial/Copy of Copy of Productpage-Concealer-1.png",
+                "/assets/Concealer/Celestial/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Celestial/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Celestial/Before-After.png"
+            ],
+            "Stellar": [
+                "/assets/Concealer/Stellar/Copy of Copy of Productpage-Concealer-11.png",
+                "/assets/Concealer/Stellar/2.png",
+                "/assets/Concealer/Stellar/3.png",
+                "/assets/Concealer/Stellar/Before-After.png"
+            ],
+            "Unstoppable": [
+                "/assets/Concealer/Unstoppable/Copy of Copy of Productpage-Concealer-12.png",
+                "/assets/Concealer/Unstoppable/2.png",
+                "/assets/Concealer/Unstoppable/3.png",
+                "/assets/Concealer/Unstoppable/Before-After.png"
+            ],
+            "Empress": [
+                "/assets/Concealer/Empress/Copy of Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Empress/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Empress/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Empress/Before-After.png"
+            ],
+            "Savage": [
+                "/assets/Concealer/Savage/Copy of Copy of Productpage-Concealer-10.png",
+                "/assets/Concealer/Savage/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Savage/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Savage/Before-After.png"
+            ],
+            "Enigma": [
+                "/assets/Concealer/Enigma/Copy of Copy of Productpage-Concealer-4.png",
+                "/assets/Concealer/Enigma/Copy of Productpage-Concealer-2.png",
+                "/assets/Concealer/Enigma/Copy of Productpage-Concealer-3.png",
+                "/assets/Concealer/Enigma/Before-After.png"
+            ],
+        },
         shades: shades,
         details: {
             description: `
@@ -299,18 +459,18 @@ export const products: Product[] = [
         sampleUrl: "/sample/concealer.mp4",
         videos: [
             {
-                videoId: "0Ql8V805Yvo",
-                thumbnail: "https://i.ytimg.com/vi/0Ql8V805Yvo/maxresdefault.jpg",
+                videoId: "thR-EIv748A",
+                thumbnail: "https://i.ytimg.com/vi/thR-EIv748A/maxresdefault.jpg",
                 title: "How to Apply Foundation for Perfect Coverage | Professional Makeup Tutorial"
             },
             {
-                videoId: "lHIKjn0PevQ",
-                thumbnail: "https://i.ytimg.com/vi/lHIKjn0PevQ/maxresdefault.jpg",
+                videoId: "L7loJHLdQSI",
+                thumbnail: "https://i.ytimg.com/vi/L7loJHLdQSI/maxresdefault.jpg",
                 title: "Natural Everyday Foundation Routine | Makeup Tips & Tricks"
             },
             {
-                videoId: "Pq4CsTjKmN4",
-                thumbnail: "https://i.ytimg.com/vi/Pq4CsTjKmN4/maxresdefault.jpg",
+                videoId: "L3mcbH2jPRk",
+                thumbnail: "https://i.ytimg.com/vi/L3mcbH2jPRk/maxresdefault.jpg",
                 title: "Foundation Tips for Beginners | Step by Step Tutorial"
             }
         ]

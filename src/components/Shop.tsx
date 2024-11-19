@@ -15,7 +15,7 @@ interface Product {
   description: string;
   shortDescription: string;
   originalPrice: number;
-  images: string[];
+  images: Record<string, string[]>;
   shades: { name: string; color: string }[];
   details: {
     description: string;
@@ -46,26 +46,6 @@ const Shop: React.FC = () => {
 
   const filteredProducts = allProducts
     .filter((product) => {
-      // Add console.log to debug filter conditions
-      console.log("Filtering product:", product.name);
-      console.log(
-        "Search term match:",
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      console.log(
-        "Category match:",
-        selectedCategory === "all" || product.category === selectedCategory
-      );
-      console.log(
-        "Price range match:",
-        product.price >= priceRange[0] && product.price <= priceRange[1]
-      );
-      console.log(
-        "Shade match:",
-        !selectedShade ||
-          product.shades.some((shade) => shade.name === selectedShade)
-      );
-
       return (
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedCategory === "all" || product.category === selectedCategory) &&

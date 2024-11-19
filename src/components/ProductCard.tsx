@@ -10,8 +10,7 @@ interface ProductCardProps {
   price: number;
   rating: number;
   description: string;
-  images: string[];
-  image?: string;
+  images: Record<string, string[]>;
   shades: { name: string; color: string }[];
 }
 
@@ -22,7 +21,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
   rating,
   description,
   images,
-  image,
   shades,
 }) => {
   const { addToCart } = useCart();
@@ -40,7 +38,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       name,
       price,
       quantity: 1,
-      image: image || images[0],
+      image: images[shadeToUse][0],
       shade: shadeToUse,
     });
   };
@@ -50,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="bg-white rounded-lg shadow-sm overflow-hidden h-full hover:shadow-md transition-shadow duration-300 flex flex-col">
         <div className="relative aspect-square overflow-hidden">
           <img
-            src={image || images[0]}
+            src={images[selectedShade || shades[0].name][0]}
             alt={name}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />

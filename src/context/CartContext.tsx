@@ -6,7 +6,7 @@ interface CartItem {
   price: number;
   quantity: number;
   image: string;
-  shade: string; // Add shade to CartItem
+  shade: string;
 }
 
 interface CartContextType {
@@ -24,13 +24,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    // Initialize cart from localStorage
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
   useEffect(() => {
-    // Update localStorage whenever cart changes
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
