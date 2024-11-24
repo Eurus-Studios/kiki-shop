@@ -430,44 +430,44 @@ const ProductDetails = () => {
     );
   };
 
-  // Move renderImages inside the component
-  const renderImages = (media: string, index: number) => (
-    <button
-      key={index}
-      onClick={() => setSelectedImage(index)}
-      className={`
-        aspect-square rounded-lg overflow-hidden 
-        border-2 transition-all duration-300
-        ${
-          selectedImage === index
-            ? "border-black ring-2 ring-black ring-offset-2"
-            : "border-transparent hover:border-gray-300"
-        }
-      `}
-    >
-      {isVideo(media) ? (
-        <div className="relative w-full h-full group">
-          <video
-            src={media}
-            className="w-full h-full object-cover"
-            muted
-            playsInline
-          />
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-            <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center">
-              <FaPlay className="text-black text-xs ml-0.5" />
-            </div>
-          </div>
-        </div>
-      ) : (
-        <img
-          src={media}
-          alt={`${product.name} view ${index + 1}`}
-          className="w-full h-full object-cover"
-        />
-      )}
-    </button>
-  );
+  // // Move renderImages inside the component
+  // const renderImages = (media: string, index: number) => (
+  //   <button
+  //     key={index}
+  //     onClick={() => setSelectedImage(index)}
+  //     className={`
+  //       aspect-square rounded-lg overflow-hidden
+  //       border-2 transition-all duration-300
+  //       ${
+  //         selectedImage === index
+  //           ? "border-black ring-2 ring-black ring-offset-2"
+  //           : "border-transparent hover:border-gray-300"
+  //       }
+  //     `}
+  //   >
+  //     {isVideo(media) ? (
+  //       <div className="relative w-full h-full group">
+  //         <video
+  //           src={media}
+  //           className="w-full h-full object-cover"
+  //           muted
+  //           playsInline
+  //         />
+  //         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+  //           <div className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center">
+  //             <FaPlay className="text-black text-xs ml-0.5" />
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ) : (
+  //       <img
+  //         src={media}
+  //         alt={`${product.name} view ${index + 1}`}
+  //         className="w-full h-full object-cover"
+  //       />
+  //     )}
+  //   </button>
+  // );
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
