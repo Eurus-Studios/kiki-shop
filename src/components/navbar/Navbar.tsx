@@ -180,7 +180,7 @@ const Navbar = () => {
       >
         <div className="px-4 py-4 space-y-2">
           {[
-            { to: "/shop", text: "Shop" },
+            { to: "/", text: "Shop" },
             { to: "/shade-finder", text: "Find your Shade" },
             { to: "/blogs", text: "Blogs" },
             { to: "/our-story", text: "Our Story" },

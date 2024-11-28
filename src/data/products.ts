@@ -53,6 +53,7 @@ export const products: Product[] = [
 
       Mystique: [
         "/assets/Foundation/Mystique/Copy of Copy of Productpage-Foundation-9.png",
+        "/assets/Foundation/Fierce/Copy of Productpage-Foundation-2.jpg",
         "/assets/Foundation/Mystique/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Mystique/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Mystique/Before-After.png",
@@ -109,12 +110,14 @@ export const products: Product[] = [
       ],
       Savage: [
         "/assets/Foundation/Savage/Copy of Copy of Productpage-Foundation-10.png",
+        "/assets/Foundation/Fierce/Copy of Productpage-Foundation-2.jpg",
         "/assets/Foundation/Savage/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Savage/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Savage/Before-After.png",
       ],
       Enigma: [
         "/assets/Foundation/Enigma/Copy of Copy of Productpage-Foundation-4.png",
+        "/assets/Foundation/Fierce/Copy of Productpage-Foundation-2.jpg",
         "/assets/Foundation/Enigma/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Enigma/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Enigma/Before-After.png",
