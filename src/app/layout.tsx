@@ -6,6 +6,7 @@ import { CartProvider } from "@/context/useCart";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -44,6 +45,7 @@ export default function RootLayout({
           </ShadeProvider>
         </CartProvider>
       </body>
+      <GoogleAnalytics gaId="G-EKVNLCL1MD" />
     </html>
   );
 }

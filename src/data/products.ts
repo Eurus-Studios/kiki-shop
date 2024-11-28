@@ -41,6 +41,7 @@ export const products: Product[] = [
         "/assets/Foundation/Feisty/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Feisty/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Feisty/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
 
       Fierce: [
@@ -49,6 +50,7 @@ export const products: Product[] = [
         "/assets/Foundation/Fierce/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Fierce/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Fierce/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
 
       Mystique: [
@@ -57,6 +59,7 @@ export const products: Product[] = [
         "/assets/Foundation/Mystique/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Mystique/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Mystique/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Fearless: [
         "/assets/Foundation/Fearless/Copy of Copy of Productpage-Foundation-5.png",
@@ -64,6 +67,7 @@ export const products: Product[] = [
         "/assets/Foundation/Fearless/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Fearless/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Fearless/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
 
       Electric: [
@@ -72,6 +76,7 @@ export const products: Product[] = [
         "/assets/Foundation/Electric/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Electric/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Electric/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Majestic: [
         "/assets/Foundation/Majestic/Copy of Copy of Productpage-Foundation-8.png",
@@ -79,6 +84,7 @@ export const products: Product[] = [
         "/assets/Foundation/Majestic/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Majestic/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Majestic/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Celestial: [
         "/assets/Foundation/Celestial/Copy of Copy of Productpage-Foundation-1.png",
@@ -86,6 +92,7 @@ export const products: Product[] = [
         "/assets/Foundation/Celestial/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Celestial/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Celestial/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Stellar: [
         "/assets/Foundation/Stellar/Copy of Copy of Productpage-Foundation-11.png",
@@ -93,6 +100,7 @@ export const products: Product[] = [
         "/assets/Foundation/Stellar/Productpage-Foundation-3.jpg",
         "/assets/Foundation/Stellar/Productpage-Foundation-4.png",
         "/assets/Foundation/Stellar/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Unstoppable: [
         "/assets/Foundation/Unstoppable/Copy of Copy of Productpage-Foundation-12.png",
@@ -100,6 +108,7 @@ export const products: Product[] = [
         "/assets/Foundation/Unstoppable/Productpage-Foundation-3.jpg",
         "/assets/Foundation/Unstoppable/Productpage-Foundation-4.png",
         "/assets/Foundation/Unstoppable/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Empress: [
         "/assets/Foundation/Empress/Copy of Copy of Productpage-Foundation-3.png",
@@ -107,6 +116,7 @@ export const products: Product[] = [
         "/assets/Foundation/Empress/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Empress/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Empress/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Savage: [
         "/assets/Foundation/Savage/Copy of Copy of Productpage-Foundation-10.png",
@@ -114,6 +124,7 @@ export const products: Product[] = [
         "/assets/Foundation/Savage/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Savage/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Savage/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
       Enigma: [
         "/assets/Foundation/Enigma/Copy of Copy of Productpage-Foundation-4.png",
@@ -121,6 +132,7 @@ export const products: Product[] = [
         "/assets/Foundation/Enigma/Copy of Productpage-Foundation-3.jpg",
         "/assets/Foundation/Enigma/Copy of Productpage-Foundation-4.png",
         "/assets/Foundation/Enigma/Before-After.png",
+        "/assets/videos/Foundation-Video.mp4",
       ],
     },
     shades: shades,
@@ -273,6 +285,7 @@ export const products: Product[] = [
         "/assets/Concealer/Feisty/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Feisty/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Feisty/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
 
       Fierce: [
@@ -280,66 +293,77 @@ export const products: Product[] = [
         "/assets/Concealer/Fierce/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Fierce/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Fierce/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Mystique: [
         "/assets/Concealer/Mystique/Copy of Copy of Productpage-Concealer-9.png",
         "/assets/Concealer/Mystique/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Mystique/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Mystique/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Fearless: [
         "/assets/Concealer/Fearless/Copy of Copy of Productpage-Concealer-5.png",
         "/assets/Concealer/Fearless/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Fearless/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Fearless/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Electric: [
         "/assets/Concealer/Electric/Copy of Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Electric/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Electric/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Electric/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Majestic: [
         "/assets/Concealer/Majestic/Copy of Copy of Productpage-Concealer-8.png",
         "/assets/Concealer/Majestic/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Majestic/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Majestic/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Celestial: [
         "/assets/Concealer/Celestial/Copy of Copy of Productpage-Concealer-1.png",
         "/assets/Concealer/Celestial/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Celestial/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Celestial/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Stellar: [
         "/assets/Concealer/Stellar/Copy of Copy of Productpage-Concealer-11.png",
         "/assets/Concealer/Stellar/2.png",
         "/assets/Concealer/Stellar/3.png",
         "/assets/Concealer/Stellar/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Unstoppable: [
         "/assets/Concealer/Unstoppable/Copy of Copy of Productpage-Concealer-12.png",
         "/assets/Concealer/Unstoppable/2.png",
         "/assets/Concealer/Unstoppable/3.png",
         "/assets/Concealer/Unstoppable/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Empress: [
         "/assets/Concealer/Empress/Copy of Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Empress/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Empress/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Empress/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Savage: [
         "/assets/Concealer/Savage/Copy of Copy of Productpage-Concealer-10.png",
         "/assets/Concealer/Savage/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Savage/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Savage/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
       Enigma: [
         "/assets/Concealer/Enigma/Copy of Copy of Productpage-Concealer-4.png",
         "/assets/Concealer/Enigma/Copy of Productpage-Concealer-2.png",
         "/assets/Concealer/Enigma/Copy of Productpage-Concealer-3.png",
         "/assets/Concealer/Enigma/Before-After.png",
+        "/assets/videos/Concealer-Video.mp4",
       ],
     },
     shades: shades,
